@@ -1,5 +1,6 @@
 import os
 from flask import Flask, jsonify, request
+from collections import OrderedDict  # Import OrderedDict
 
 app = Flask(__name__)
 
@@ -14,7 +15,8 @@ books = [
         "groupMember_name": ""
     },
     {
-        "id": 2, "title": "The Alchemist", 
+        "id": 2, 
+        "title": "The Alchemist", 
         "author": "Paulo Coelho", 
         "price": 7.21, 
         "year_published": 1988, 
@@ -33,14 +35,17 @@ books = [
 # Endpoint to get all books
 @app.route('/books', methods=['GET'])
 def get_books():
-    return jsonify(books)
+    # Use OrderedDict to ensure the order of keys in the response
+    ordered_books = [OrderedDict(book) for book in books]
+    return jsonify(ordered_books)
 
 # Endpoint to get a specific book by ID
 @app.route('/books/<int:book_id>', methods=['GET'])
 def get_book(book_id):
     book = next((book for book in books if book['id'] == book_id), None)
     if book:
-        return jsonify(book)
+        # Use OrderedDict for a single book response
+        return jsonify(OrderedDict(book))
     return jsonify({"message": "Book not found"}), 404
 
 # Endpoint to add a new book
@@ -57,7 +62,7 @@ def update_book(book_id):
     book = next((book for book in books if book['id'] == book_id), None)
     if book:
         book.update(updated_data)  # Update the book with the new data
-        return jsonify(book)
+        return jsonify(OrderedDict(book))  # Preserve key order
     return jsonify({"message": "Book not found"}), 404
 
 # Endpoint to delete a book
