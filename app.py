@@ -5,9 +5,29 @@ app = Flask(__name__)
 
 # Sample data (you could replace this with a database later)
 books = [
-    {"id": 1, "title": "Melania", "author": "Melania Trump", "price": 40.00, "year_published": 2024, "groupMember_name": ""},
-    {"id": 2, "title": "The Alchemist", "author": "Paulo Coelho", "price": 7.21, "year_published": 1988, "groupMember_name": ""},
-    {"id": 3, "title": "The 48 Laws of Power", "author": "Robert Greene", "price": 22.19, "year_published": 1988, "groupMember_name": ""},
+    {
+        "id": 1, 
+        "title": "Melania", 
+        "author": "Melania Trump", 
+        "price": 40.00, 
+        "year_published": 2024, 
+        "groupMember_name": ""
+    },
+    {
+        "id": 2, "title": "The Alchemist", 
+        "author": "Paulo Coelho", 
+        "price": 7.21, 
+        "year_published": 1988, 
+        "groupMember_name": ""
+    },
+    {
+        "id": 3, 
+        "title": "The 48 Laws of Power", 
+        "author": "Robert Greene", 
+        "price": 22.19, 
+        "year_published": 1988, 
+        "groupMember_name": ""
+    },
 ]
 
 # Endpoint to get all books
