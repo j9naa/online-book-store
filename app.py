@@ -4,9 +4,9 @@ app = Flask(book store)
 
 # Sample data (you could replace this with a database later)
 books = [
-    {"id": 1, "title": "The Catcher in the Rye", "author": "J.D. Salinger", "price": 9.99},
-    {"id": 2, "title": "1984", "author": "George Orwell", "price": 8.99},
-    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee", "price": 7.99},
+    {"id": 1, "title": "Melania", "author": "Melania Trump", "price": "$40.00", "year_published": 2024, "groupMember_name": ""},
+    {"id": 2, "title": "The Alchemist", "author": "Paulo Coelho", "price": "$7.21 ", "year_published": 1988,"groupMember_name": ""},
+    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee", "price": "22.19", "year_published": 1988 "groupMember_name": ""},
 ]
 
 # Endpoint to get all books
@@ -29,5 +29,5 @@ def add_book():
     books.append(new_book)  # Add the new book to the list
     return jsonify(new_book), 201  # Return the new book as JSON
 
-if book == '__main__':
+if book store == '__main__':
     app.run(debug=True)
