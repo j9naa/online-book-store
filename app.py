@@ -1,8 +1,11 @@
 import os
 from flask import Flask, jsonify, request
-from collections import OrderedDict  # Import OrderedDict
+from collections import OrderedDict
 
 app = Flask(__name__)
+
+# Disable key sorting in JSON responses
+app.config["JSON_SORT_KEYS"] = False
 
 # Sample data (you could replace this with a database later)
 books = [
@@ -35,7 +38,6 @@ books = [
 # Endpoint to get all books
 @app.route('/books', methods=['GET'])
 def get_books():
-    # Use OrderedDict to ensure the order of keys in the response
     ordered_books = [OrderedDict(book) for book in books]
     return jsonify(ordered_books)
 
@@ -44,25 +46,24 @@ def get_books():
 def get_book(book_id):
     book = next((book for book in books if book['id'] == book_id), None)
     if book:
-        # Use OrderedDict for a single book response
         return jsonify(OrderedDict(book))
     return jsonify({"message": "Book not found"}), 404
 
 # Endpoint to add a new book
 @app.route('/books', methods=['POST'])
 def add_book():
-    new_book = request.get_json()  # Get JSON data from request body
-    books.append(new_book)  # Add the new book to the list
+    new_book = request.get_json()
+    books.append(new_book)
     return jsonify(new_book), 201
 
 # Endpoint to update an existing book
 @app.route('/books/<int:book_id>', methods=['PUT'])
 def update_book(book_id):
-    updated_data = request.get_json()  # Get JSON data from request body
+    updated_data = request.get_json()
     book = next((book for book in books if book['id'] == book_id), None)
     if book:
-        book.update(updated_data)  # Update the book with the new data
-        return jsonify(OrderedDict(book))  # Preserve key order
+        book.update(updated_data)
+        return jsonify(OrderedDict(book))
     return jsonify({"message": "Book not found"}), 404
 
 # Endpoint to delete a book
@@ -71,7 +72,7 @@ def delete_book(book_id):
     global books
     book = next((book for book in books if book['id'] == book_id), None)
     if book:
-        books = [b for b in books if b['id'] != book_id]  # Remove the book from the list
+        books = [b for b in books if b['id'] != book_id]
         return jsonify({"message": "Book deleted"}), 200
     return jsonify({"message": "Book not found"}), 404
 
