@@ -1,12 +1,12 @@
 from flask import Flask, jsonify, request
 
-app = Flask(book store)
+app = Flask(__name__)  # Initialize the Flask app
 
 # Sample data (you could replace this with a database later)
 books = [
-    {"id": 1, "title": "Melania", "author": "Melania Trump", "price": "$40.00", "year_published": 2024, "groupMember_name": ""},
-    {"id": 2, "title": "The Alchemist", "author": "Paulo Coelho", "price": "$7.21 ", "year_published": 1988,"groupMember_name": ""},
-    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee", "price": "22.19", "year_published": 1988 "groupMember_name": ""},
+    {"id": 1, "title": "Melania", "author": "Melania Trump", "price": 40.00, "year_published": 2024, "groupMember_name": ""},
+    {"id": 2, "title": "The Alchemist", "author": "Paulo Coelho", "price": 7.21, "year_published": 1988, "groupMember_name": ""},
+    {"id": 3, "title": "To Kill a Mockingbird", "author": "Harper Lee", "price": 22.19, "year_published": 1988, "groupMember_name": ""},
 ]
 
 # Endpoint to get all books
@@ -29,5 +29,6 @@ def add_book():
     books.append(new_book)  # Add the new book to the list
     return jsonify(new_book), 201  # Return the new book as JSON
 
-if book store == '__main__':
+# Run the application
+if __name__ == '__main__':
     app.run(debug=True)
